@@ -1,0 +1,15 @@
+[Unit]
+Description=User Service
+After=network-online.target
+
+[Service]
+User=roboshop
+Environment=REDIS_URL="redis://redis.DOMAIN_NAME:6379"
+Environment=MONGO_URL="mongodb://mongodb.DOMAIN_NAME:27017/users"
+ExecStart=/bin/node /app/server.js
+SyslogIdentifier=user
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
